@@ -335,7 +335,7 @@ const KEYS = {
       caps: '\\',
     },
   },
-  Del: {
+  Delete: {
     eng: {
       lowerCase: 'Del',
       shift: 'Del',
@@ -611,7 +611,7 @@ const KEYS = {
       caps: 'Б',
     },
   },
-  Dot: {
+  Period: {
     eng: {
       lowerCase: '.',
       shift: '>',
@@ -659,7 +659,7 @@ const KEYS = {
       caps: 'Shift',
     },
   },
-  CtrlLeft: {
+  ControlLeft: {
     eng: {
       lowerCase: 'Ctrl',
       shift: 'Ctrl',
@@ -671,7 +671,7 @@ const KEYS = {
       caps: 'Ctrl',
     },
   },
-  Win: {
+  MetaLeft: {
     eng: {
       lowerCase: 'Win',
       shift: 'Win',
@@ -755,7 +755,7 @@ const KEYS = {
       caps: '►',
     },
   },
-  CtrlRight: {
+  ControlRight: {
     eng: {
       lowerCase: 'Ctrl',
       shift: 'Ctrl',

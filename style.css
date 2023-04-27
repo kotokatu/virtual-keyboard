@@ -44,10 +44,6 @@
   cursor: pointer;
 }
 
-.key:hover {
-  background-color: #759772;
-}
-
 .Backspace,
 .CapsLock,
 .ShiftLeft {
@@ -65,4 +61,16 @@
 
 .Space {
   width: 330px;
+}
+
+.key:hover {
+  background-color: #759772;
+}
+
+.key:active {
+  background-color: #62bb5a;
+}
+
+.key.active {
+  background-color: #62bb5a;
 }
