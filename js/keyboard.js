@@ -1,31 +1,29 @@
 import KEYS from './keys.js';
+import createNode from './utils/createNode.js';
 
 export default class Keyboard {
-  constructor() {
+  constructor(rows) {
+    this.rows = rows;
     this.body = document.body;
-    this.keys = [];
+    this.pressedKeys = [];
     this.lang = 'eng';
     this.letterCase = 'lowerCase';
   }
 
   renderKeyboard() {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'wrapper';
-    wrapper.innerHTML = `<h1>Виртуальная клавиатура</h1>
-                        <textarea class="output" name="" id=""></textarea>`;
-    this.body.append(wrapper);
-    const keyboard = document.createElement('div');
-    keyboard.className = 'keyboard';
-    wrapper.append(keyboard);
-    Object.keys(KEYS).forEach((key) => {
-      keyboard.append(this.renderKey(key));
-    });
+    const keyboard = createNode('div', 'keyboard');
+    document.querySelector('.wrapper').append(keyboard);
+    this.rows.forEach((row) => keyboard.append(this.createRow(row)));
   }
 
-  renderKey(keyName) {
-    const key = document.createElement('div');
-    key.className = `key ${keyName}`;
-    key.innerHTML = KEYS[keyName][this.lang][this.letterCase];
+  createRow(rowArray) {
+    const row = createNode('div', 'row');
+    rowArray.forEach((key) => row.append(this.createKey(key)));
+    return row;
+  }
+
+  createKey(keyName) {
+    const key = createNode('div', `key ${keyName}`, KEYS[keyName][this.lang][this.letterCase]);
     return key;
   }
 }
