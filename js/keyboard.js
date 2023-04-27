@@ -14,7 +14,11 @@ export default class Keyboard {
   init = () => {
     this.renderKeyboard();
     document.addEventListener('keydown', (e) => {
-      document.querySelector(`.${e.code}`).classList.add('active');
+      if (!this.fnKeys.includes(e.code)) {
+        this.handleInputKeys(e);
+      } else {
+        this.handleFnKeys(e);
+      }
     });
     document.addEventListener('keyup', (e) => {
       document.querySelector(`.${e.code}`).classList.remove('active');
@@ -37,49 +41,60 @@ export default class Keyboard {
     const key = createNode('div', `key ${keyName}`, KEYS[keyName][this.lang][this.layout]);
     key.id = keyName;
     if (!this.fnKeys.includes(key.id)) {
-      key.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.output.focus();
-        this.printChar(e);
-      });
+      key.addEventListener('mousedown', this.handleInputKeys);
     } else {
-      key.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.output.focus();
-        this.printChar(e);
-      });
+      key.addEventListener('mousedown', this.handleFnKeys);
     }
+    key.addEventListener('mouseup', (e) => {
+      document.querySelector(`.${e.target.id}`).classList.remove('active');
+    });
     return key;
   };
 
-  printChar = (e) => {
-    this.output.value += e.target.innerText;
+  handleInputKeys = (e) => {
+    e.preventDefault();
+    this.output.focus();
+    const keyName = e.code || e.target.id;
+    document.querySelector(`.${keyName}`).classList.add('active');
+    this.output.value += KEYS[keyName][this.lang][this.layout];
   };
 
-  handleFnKeyClicks = (e) => {
-    const cursorPoint = this.output.selectionStart;
+  handleFnKeys = (e) => {
+    e.preventDefault();
+    this.output.focus();
+    const keyName = e.code || e.target.id;
+    document.querySelector(`.${keyName}`).classList.add('active');
+    let cursorPoint = this.output.selectionStart;
     const left = this.output.value.slice(0, cursorPoint);
     const right = this.output.value.slice(cursorPoint);
-    switch (e.target.id) {
+    switch (keyName) {
       case 'Backspace':
         this.output.value = `${left.slice(0, -1)}${right}`;
+        cursorPoint -= 1;
         break;
       case 'Space':
         this.output.value = `${left} ${right}`;
+        cursorPoint += 1;
         break;
       case 'Delete':
         this.output.value = `${left}${right.slice(1)}`;
         break;
       case 'Enter':
         this.output.value = `${left}\n${right}`;
+        cursorPoint += 1;
         break;
       case 'CapsLock':
         this.layout = this.layout === 'caps' ? 'lowerCase' : 'caps';
         this.keyboard.remove();
         this.renderKeyboard();
         break;
+      case 'Tab':
+        this.output.value = `${left}\t${right}`;
+        cursorPoint += 1;
+        break;
       default:
         break;
     }
+    this.output.setSelectionRange(cursorPoint, cursorPoint);
   };
 }

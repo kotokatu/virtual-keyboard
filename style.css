@@ -63,14 +63,14 @@
   width: 330px;
 }
 
-.key:hover {
+.keyboard .key:hover {
   background-color: #759772;
 }
 
-.key:active {
+/* .key:active {
   background-color: #62bb5a;
-}
+} */
 
-.key.active {
+.keyboard .key.active {
   background-color: #62bb5a;
 }
