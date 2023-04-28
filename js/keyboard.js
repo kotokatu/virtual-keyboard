@@ -13,16 +13,8 @@ export default class Keyboard {
 
   init = () => {
     this.renderKeyboard();
-    document.addEventListener('keydown', (e) => {
-      if (!this.fnKeys.includes(e.code)) {
-        this.handleInputKeys(e);
-      } else {
-        this.handleFnKeys(e);
-      }
-    });
-    document.addEventListener('keyup', (e) => {
-      if (e.code !== 'CapsLock') document.querySelector(`.${e.code}`).classList.remove('active');
-    });
+    document.addEventListener('keydown', this.inputKeys);
+    document.addEventListener('keyup', this.resetKeys);
   };
 
   renderKeyboard = () => {
@@ -40,57 +32,59 @@ export default class Keyboard {
   createKey = (keyName) => {
     const key = createNode('div', `key ${keyName}`, KEYS[keyName][this.lang][this.layout]);
     key.id = keyName;
-    if (this.fnKeys.includes(key.id)) key.addEventListener('mousedown', this.handleFnKeys);
-    else key.addEventListener('mousedown', this.handleInputKeys);
-    key.addEventListener('mouseup', (e) => {
-      if (e.target.id !== 'CapsLock') document.querySelector(`.${e.target.id}`).classList.remove('active');
-    });
+    key.addEventListener('mousedown', this.inputKeys);
+    key.addEventListener('mouseup', this.resetKeys);
     return key;
   };
 
-  handleInputKeys = (e) => {
+  inputKeys = (e) => {
     e.preventDefault();
     this.output.focus();
-    const keyName = e.code || e.target.id;
-    document.querySelector(`.${keyName}`).classList.add('active');
-    this.output.value += KEYS[keyName][this.lang][this.layout];
-  };
-
-  handleFnKeys = (e) => {
-    e.preventDefault();
-    this.output.focus();
-    const keyName = e.code || e.target.id;
-    if (keyName !== 'CapsLock') document.querySelector(`.${keyName}`).classList.add('active');
     let cursorPos = this.output.selectionStart;
     const left = this.output.value.slice(0, cursorPos);
     const right = this.output.value.slice(cursorPos);
-    switch (keyName) {
-      case 'Backspace':
+    const keyName = e.code || e.target.id;
+    if (keyName !== 'CapsLock') document.querySelector(`.${keyName}`).classList.add('active');
+    if (!this.fnKeys.includes(keyName)) {
+      this.output.value = left + KEYS[keyName][this.lang][this.layout] + right;
+      cursorPos += 1;
+    } else {
+      if (keyName === 'Backspace') {
         this.output.value = `${left.slice(0, -1)}${right}`;
         cursorPos -= 1;
-        break;
-      case 'Space':
+      }
+      if (keyName === 'Space') {
         this.output.value = `${left} ${right}`;
         cursorPos += 1;
-        break;
-      case 'Delete':
+      }
+      if (keyName === 'Delete') {
         this.output.value = `${left}${right.slice(1)}`;
-        break;
-      case 'Enter':
+      }
+      if (keyName === 'Enter') {
         this.output.value = `${left}\n${right}`;
         cursorPos += 1;
-        break;
-      case 'CapsLock':
+      }
+      if (keyName === 'CapsLock') {
         document.querySelector(`.${keyName}`).classList.toggle('active');
         this.layout = this.layout === 'caps' ? 'lowerCase' : 'caps';
         this.switchLayout();
-        break;
-      case 'Tab':
+      }
+      if (keyName === 'Tab') {
         this.output.value = `${left}\t${right}`;
         cursorPos += 1;
-        break;
-      default:
-        break;
+      }
+      if (/^Control*/.test(keyName)) {
+        if (e.altKey) this.lang = this.lang === 'eng' ? 'rus' : 'eng';
+        this.switchLayout();
+      }
+      if (/^Alt*/.test(keyName)) {
+        if (e.ctrlKey) this.lang = this.lang === 'eng' ? 'rus' : 'eng';
+        this.switchLayout();
+      }
+      if (/^Shift*/.test(keyName)) {
+        this.layout = 'shift';
+        this.switchLayout();
+      }
     }
     this.output.setSelectionRange(cursorPos, cursorPos);
   };
@@ -100,5 +94,14 @@ export default class Keyboard {
       const key = element;
       key.innerHTML = KEYS[key.id][this.lang][this.layout];
     });
+  };
+
+  resetKeys = (e) => {
+    const keyName = e.code || e.target.id;
+    if (keyName !== 'CapsLock') document.querySelector(`.${keyName}`).classList.remove('active');
+    if (keyName === 'ShiftLeft' || keyName === 'ShiftRight') {
+      this.layout = 'lowerCase';
+      this.switchLayout();
+    }
   };
 }
