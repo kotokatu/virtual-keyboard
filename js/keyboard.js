@@ -34,6 +34,7 @@ export default class Keyboard {
     key.id = keyName;
     key.addEventListener('mousedown', this.inputKeys);
     key.addEventListener('mouseup', this.resetKeys);
+    if (keyName !== 'CapsLock') key.addEventListener('mouseleave', this.resetKeys);
     return key;
   };
 
@@ -44,6 +45,7 @@ export default class Keyboard {
     const left = this.output.value.slice(0, cursorPos);
     const right = this.output.value.slice(cursorPos);
     const keyName = e.code || e.target.id;
+    if (!KEYS[keyName]) return;
     if (keyName !== 'CapsLock') document.querySelector(`.${keyName}`).classList.add('active');
     if (!this.fnKeys.includes(keyName)) {
       this.output.value = left + KEYS[keyName][this.lang][this.layout] + right;
@@ -66,23 +68,47 @@ export default class Keyboard {
       }
       if (keyName === 'CapsLock') {
         document.querySelector(`.${keyName}`).classList.toggle('active');
-        this.layout = this.layout === 'caps' ? 'lowerCase' : 'caps';
+        switch (this.layout) {
+          case 'caps':
+            this.layout = 'lowerCase';
+            break;
+          case 'shiftCaps':
+            this.layout = 'shift';
+            break;
+          case 'lowerCase':
+            this.layout = 'caps';
+            break;
+          case 'shift':
+            this.layout = 'shiftCaps';
+            break;
+          default:
+            break;
+        }
         this.switchLayout();
       }
       if (keyName === 'Tab') {
         this.output.value = `${left}\t${right}`;
         cursorPos += 1;
       }
-      if (/^Control*/.test(keyName)) {
+      if (/^Control*/i.test(keyName)) {
         if (e.altKey) this.lang = this.lang === 'eng' ? 'rus' : 'eng';
         this.switchLayout();
       }
-      if (/^Alt*/.test(keyName)) {
+      if (/^Alt*/i.test(keyName)) {
         if (e.ctrlKey) this.lang = this.lang === 'eng' ? 'rus' : 'eng';
         this.switchLayout();
       }
-      if (/^Shift*/.test(keyName)) {
-        this.layout = 'shift';
+      if (/^Shift*/i.test(keyName)) {
+        switch (this.layout) {
+          case 'caps':
+            this.layout = 'shiftCaps';
+            break;
+          case 'lowerCase':
+            this.layout = 'shift';
+            break;
+          default:
+            break;
+        }
         this.switchLayout();
       }
     }
@@ -92,15 +118,17 @@ export default class Keyboard {
   switchLayout = () => {
     document.querySelectorAll('.key').forEach((element) => {
       const key = element;
-      key.innerHTML = KEYS[key.id][this.lang][this.layout];
+      key.innerHTML = KEYS[key.id]?.[this.lang][this.layout];
     });
   };
 
   resetKeys = (e) => {
     const keyName = e.code || e.target.id;
+    if (!KEYS[keyName]) return;
     if (keyName !== 'CapsLock') document.querySelector(`.${keyName}`).classList.remove('active');
-    if (keyName === 'ShiftLeft' || keyName === 'ShiftRight') {
-      this.layout = 'lowerCase';
+    if (/^Shift*/i.test(keyName)) {
+      if (this.layout === 'shift') this.layout = 'lowerCase';
+      if (this.layout === 'shiftCaps') this.layout = 'caps';
       this.switchLayout();
     }
   };
