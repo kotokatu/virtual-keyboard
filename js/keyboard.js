@@ -1,4 +1,4 @@
-import KEYS from './keys.js';
+import KEYS from './libs/keys.js';
 import createNode from './utils/createNode.js';
 
 export default class Keyboard {
