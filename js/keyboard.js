@@ -110,19 +110,19 @@ export default class Keyboard {
     this.removeActiveState(e);
   };
 
-  renderLayout = () => {
-    document.querySelectorAll('.key').forEach((element) => {
-      const key = element;
-      key.innerHTML = KEYS[key.id][this.lang][this.layout];
-    });
-  };
-
   switchLayout = () => {
     if (this.shift && this.caps) this.layout = 'shiftCaps';
     else if (this.shift) this.layout = 'shift';
     else if (this.caps) this.layout = 'caps';
     else this.layout = 'lowerCase';
     this.renderLayout();
+  };
+
+  renderLayout = () => {
+    document.querySelectorAll('.key').forEach((element) => {
+      const key = element;
+      key.innerHTML = KEYS[key.id][this.lang][this.layout];
+    });
   };
 
   removeActiveState = (e) => {
