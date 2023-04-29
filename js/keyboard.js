@@ -12,6 +12,7 @@ export default class Keyboard {
 
   init = () => {
     this.renderKeyboard();
+    this.output.addEventListener('focusout', () => this.output.focus());
     document.addEventListener('keydown', this.handleDownEvents);
     document.addEventListener('keyup', this.handleUpEvents);
     document.addEventListener('mouseup', this.handleUpEvents);
@@ -41,7 +42,7 @@ export default class Keyboard {
     const keyName = e.code || e.target.id;
     if (!KEYS[keyName]) return;
     e.preventDefault();
-    this.output.focus();
+    // this.output.focus();
     if (keyName !== 'CapsLock') document.querySelector(`.${keyName}`).classList.add('active');
     let { start } = this.getSelection();
     const { end, left, right } = this.getSelection();
