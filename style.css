@@ -19,6 +19,10 @@
   border-radius: 5px;
 }
 
+.output {
+  text-align: left;
+}
+
 .keyboard {
   display: flex;
   flex-direction: column;

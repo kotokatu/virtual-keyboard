@@ -9,10 +9,8 @@ const rows = [
   ['ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ControlRight'],
 ];
 
-const fnKeys = ['Backspace', 'Tab', 'Delete', 'CapsLock', 'Enter', 'ShiftLeft', 'ShiftRight', 'ControlLeft', 'MetaLeft', 'AltLeft', 'AltRight', 'ControlRight', 'Space'];
-
-const wrapper = createNode('div', 'wrapper', '<h1>Виртуальная клавиатура</h1><textarea class="output" name="keyboard" id="keyboard"></textarea>');
+const wrapper = createNode('div', 'wrapper', '<h1>Виртуальная клавиатура</h1><textarea class="output" name="keyboard" id="keyboard" spellcheck=”false”></textarea>');
 document.body.prepend(wrapper);
 
-const keyboard = new Keyboard(rows, fnKeys);
+const keyboard = new Keyboard(rows);
 keyboard.init();

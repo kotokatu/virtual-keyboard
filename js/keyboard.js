@@ -2,10 +2,8 @@ import KEYS from './keys.js';
 import createNode from './utils/createNode.js';
 
 export default class Keyboard {
-  constructor(rows, fnKeys) {
+  constructor(rows) {
     this.rows = rows;
-    this.fnKeys = fnKeys;
-    this.pressedKeys = [];
     this.lang = 'eng';
     this.layout = 'lowerCase';
     this.output = document.querySelector('.output');
@@ -47,70 +45,61 @@ export default class Keyboard {
     const keyName = e.code || e.target.id;
     if (!KEYS[keyName]) return;
     if (keyName !== 'CapsLock') document.querySelector(`.${keyName}`).classList.add('active');
-    if (!this.fnKeys.includes(keyName)) {
+    if (keyName === 'MetaLeft') return;
+    if (keyName === 'Backspace') {
+      this.output.value = `${left.slice(0, -1)}${right}`;
+      cursorPos -= 1;
+    } else if (keyName === 'Space') {
+      this.output.value = `${left} ${right}`;
+      cursorPos += 1;
+    } else if (keyName === 'Delete') {
+      this.output.value = `${left}${right.slice(1)}`;
+    } else if (keyName === 'Enter') {
+      this.output.value = `${left}\n${right}`;
+      cursorPos += 1;
+    } else if (keyName === 'CapsLock') {
+      document.querySelector(`.${keyName}`).classList.toggle('active');
+      switch (this.layout) {
+        case 'caps':
+          this.layout = 'lowerCase';
+          break;
+        case 'shiftCaps':
+          this.layout = 'shift';
+          break;
+        case 'lowerCase':
+          this.layout = 'caps';
+          break;
+        case 'shift':
+          this.layout = 'shiftCaps';
+          break;
+        default:
+          break;
+      }
+      this.switchLayout();
+    } else if (keyName === 'Tab') {
+      this.output.value = `${left}\t${right}`;
+      cursorPos += 1;
+    } else if (/^Control*/i.test(keyName)) {
+      if (e.altKey) this.lang = this.lang === 'eng' ? 'rus' : 'eng';
+      this.switchLayout();
+    } else if (/^Alt*/i.test(keyName)) {
+      if (e.ctrlKey) this.lang = this.lang === 'eng' ? 'rus' : 'eng';
+      this.switchLayout();
+    } else if (/^Shift*/i.test(keyName)) {
+      switch (this.layout) {
+        case 'caps':
+          this.layout = 'shiftCaps';
+          break;
+        case 'lowerCase':
+          this.layout = 'shift';
+          break;
+        default:
+          break;
+      }
+      this.switchLayout();
+    } else {
       this.output.value = left + KEYS[keyName][this.lang][this.layout] + right;
       cursorPos += 1;
-    } else {
-      if (keyName === 'Backspace') {
-        this.output.value = `${left.slice(0, -1)}${right}`;
-        cursorPos -= 1;
-      }
-      if (keyName === 'Space') {
-        this.output.value = `${left} ${right}`;
-        cursorPos += 1;
-      }
-      if (keyName === 'Delete') {
-        this.output.value = `${left}${right.slice(1)}`;
-      }
-      if (keyName === 'Enter') {
-        this.output.value = `${left}\n${right}`;
-        cursorPos += 1;
-      }
-      if (keyName === 'CapsLock') {
-        document.querySelector(`.${keyName}`).classList.toggle('active');
-        switch (this.layout) {
-          case 'caps':
-            this.layout = 'lowerCase';
-            break;
-          case 'shiftCaps':
-            this.layout = 'shift';
-            break;
-          case 'lowerCase':
-            this.layout = 'caps';
-            break;
-          case 'shift':
-            this.layout = 'shiftCaps';
-            break;
-          default:
-            break;
-        }
-        this.switchLayout();
-      }
-      if (keyName === 'Tab') {
-        this.output.value = `${left}\t${right}`;
-        cursorPos += 1;
-      }
-      if (/^Control*/i.test(keyName)) {
-        if (e.altKey) this.lang = this.lang === 'eng' ? 'rus' : 'eng';
-        this.switchLayout();
-      }
-      if (/^Alt*/i.test(keyName)) {
-        if (e.ctrlKey) this.lang = this.lang === 'eng' ? 'rus' : 'eng';
-        this.switchLayout();
-      }
-      if (/^Shift*/i.test(keyName)) {
-        switch (this.layout) {
-          case 'caps':
-            this.layout = 'shiftCaps';
-            break;
-          case 'lowerCase':
-            this.layout = 'shift';
-            break;
-          default:
-            break;
-        }
-        this.switchLayout();
-      }
     }
     this.output.setSelectionRange(cursorPos, cursorPos);
   };
