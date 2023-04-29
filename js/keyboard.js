@@ -11,13 +11,13 @@ export default class Keyboard {
 
   init = () => {
     this.renderKeyboard();
-    document.addEventListener('keydown', this.inputKeys);
+    document.addEventListener('keydown', this.handleKeys);
     document.addEventListener('keyup', this.resetKeys);
   };
 
   renderKeyboard = () => {
     this.keyboard = createNode('div', 'keyboard');
-    document.querySelector('.wrapper').append(this.keyboard);
+    document.querySelector('.main').append(this.keyboard);
     this.rows.forEach((row) => this.keyboard.append(this.createRow(row)));
   };
 
@@ -30,13 +30,13 @@ export default class Keyboard {
   createKey = (keyName) => {
     const key = createNode('div', `key ${keyName}`, KEYS[keyName][this.lang][this.layout]);
     key.id = keyName;
-    key.addEventListener('mousedown', this.inputKeys);
+    key.addEventListener('mousedown', this.handleKeys);
     key.addEventListener('mouseup', this.resetKeys);
     if (keyName !== 'CapsLock') key.addEventListener('mouseleave', this.resetKeys);
     return key;
   };
 
-  inputKeys = (e) => {
+  handleKeys = (e) => {
     e.preventDefault();
     this.output.focus();
     let cursorPos = this.output.selectionStart;

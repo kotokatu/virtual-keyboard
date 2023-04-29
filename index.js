@@ -9,8 +9,8 @@ const rows = [
   ['ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ControlRight'],
 ];
 
-const wrapper = createNode('div', 'wrapper', '<h1>Виртуальная клавиатура</h1><textarea class="output" name="keyboard" id="keyboard" spellcheck=”false”></textarea>');
-document.body.prepend(wrapper);
+const main = createNode('main', 'main', '<h1 class="main__title">Virtual keyboard</h1><textarea class="output" name="keyboard" id="keyboard" spellcheck="false"></textarea>');
+document.body.prepend(main);
 
 const keyboard = new Keyboard(rows);
 keyboard.init();
