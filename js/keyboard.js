@@ -1,10 +1,11 @@
 import KEYS from './libs/keys.js';
 import createNode from './utils/createNode.js';
+import { set } from './utils/storage.js';
 
 export default class Keyboard {
-  constructor(rows) {
+  constructor(rows, lang) {
     this.rows = rows;
-    this.lang = 'eng';
+    this.lang = lang;
     this.layout = 'lowerCase';
     this.output = document.querySelector('.output');
   }
@@ -37,13 +38,13 @@ export default class Keyboard {
   };
 
   handleKeys = (e) => {
+    const keyName = e.code || e.target.id;
+    if (!KEYS[keyName]) return;
     e.preventDefault();
     this.output.focus();
     let cursorPos = this.output.selectionStart;
     const left = this.output.value.slice(0, cursorPos);
     const right = this.output.value.slice(cursorPos);
-    const keyName = e.code || e.target.id;
-    if (!KEYS[keyName]) return;
     if (keyName !== 'CapsLock') document.querySelector(`.${keyName}`).classList.add('active');
     if (keyName === 'MetaLeft') return;
     if (keyName === 'Backspace') {
@@ -81,9 +82,11 @@ export default class Keyboard {
       cursorPos += 1;
     } else if (/^Control*/i.test(keyName)) {
       if (e.altKey) this.lang = this.lang === 'eng' ? 'rus' : 'eng';
+      set('lang', this.lang);
       this.switchLayout();
     } else if (/^Alt*/i.test(keyName)) {
       if (e.ctrlKey) this.lang = this.lang === 'eng' ? 'rus' : 'eng';
+      set('lang', this.lang);
       this.switchLayout();
     } else if (/^Shift*/i.test(keyName)) {
       switch (this.layout) {

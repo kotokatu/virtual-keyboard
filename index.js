@@ -1,5 +1,6 @@
 import Keyboard from './js/keyboard.js';
 import createNode from './js/utils/createNode.js';
+import { get } from './js/utils/storage.js';
 
 const rows = [
   ['Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal', 'Backspace'],
@@ -9,8 +10,8 @@ const rows = [
   ['ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ControlRight'],
 ];
 
-const main = createNode('main', 'main', '<h1 class="main__title">Virtual keyboard</h1><textarea class="output" name="keyboard" id="keyboard" spellcheck="false"></textarea>');
+const main = createNode('main', 'main', '<h1 class="main__title">Virtual keyboard</h1><textarea class="output" name="keyboard" id="keyboard" spellcheck="false" autocorrect="off"></textarea>');
 document.body.prepend(main);
-
-const keyboard = new Keyboard(rows);
+const lang = get('lang');
+const keyboard = new Keyboard(rows, lang);
 keyboard.init();
