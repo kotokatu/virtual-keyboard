@@ -10,7 +10,7 @@ const rows = [
   ['ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ControlRight'],
 ];
 
-const main = createNode('main', 'main', '<h1 class="main__title">Virtual keyboard</h1><textarea class="output" name="keyboard" id="keyboard" spellcheck="false" autocorrect="off"></textarea>');
+const main = createNode('main', 'main', '<h1 class="main__title">Virtual keyboard</h1><textarea class="output" name="keyboard" id="keyboard" spellcheck="false" autocorrect="off" autocomplete="off"></textarea>');
 document.body.prepend(main);
 const lang = get('lang');
 const keyboard = new Keyboard(rows, lang);

@@ -182,6 +182,7 @@ const KEYS = {
     },
   },
   Backspace: {
+    fn: true,
     eng: {
       lowerCase: 'Backspace',
       shift: 'Backspace',
@@ -196,6 +197,7 @@ const KEYS = {
     },
   },
   Tab: {
+    fn: true,
     eng: {
       lowerCase: 'Tab',
       shift: 'Tab',
@@ -392,6 +394,7 @@ const KEYS = {
     },
   },
   Delete: {
+    fn: true,
     eng: {
       lowerCase: 'Del',
       shift: 'Del',
@@ -406,6 +409,7 @@ const KEYS = {
     },
   },
   CapsLock: {
+    fn: true,
     eng: {
       lowerCase: 'CapsLock',
       shift: 'CapsLock',
@@ -574,6 +578,7 @@ const KEYS = {
     },
   },
   Enter: {
+    fn: true,
     eng: {
       lowerCase: 'Enter',
       shift: 'Enter',
@@ -588,6 +593,7 @@ const KEYS = {
     },
   },
   ShiftLeft: {
+    fn: true,
     eng: {
       lowerCase: 'Shift',
       shift: 'Shift',
@@ -756,6 +762,7 @@ const KEYS = {
     },
   },
   ShiftRight: {
+    fn: true,
     eng: {
       lowerCase: 'Shift',
       shift: 'Shift',
@@ -770,6 +777,7 @@ const KEYS = {
     },
   },
   ControlLeft: {
+    fn: true,
     eng: {
       lowerCase: 'Ctrl',
       shift: 'Ctrl',
@@ -784,6 +792,7 @@ const KEYS = {
     },
   },
   MetaLeft: {
+    fn: true,
     eng: {
       lowerCase: 'Win',
       shift: 'Win',
@@ -798,6 +807,7 @@ const KEYS = {
     },
   },
   AltLeft: {
+    fn: true,
     eng: {
       lowerCase: 'Alt',
       shift: 'Alt',
@@ -812,6 +822,7 @@ const KEYS = {
     },
   },
   Space: {
+    fn: true,
     eng: {
       lowerCase: '',
       shift: '',
@@ -826,6 +837,7 @@ const KEYS = {
     },
   },
   AltRight: {
+    fn: true,
     eng: {
       lowerCase: 'Alt',
       shift: 'Alt',
@@ -882,6 +894,7 @@ const KEYS = {
     },
   },
   ControlRight: {
+    fn: true,
     eng: {
       lowerCase: 'Ctrl',
       shift: 'Ctrl',

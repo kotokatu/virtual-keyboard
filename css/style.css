@@ -89,7 +89,7 @@
   cursor: pointer;
   border: 2px solid #997299;
   box-shadow: 0 4px #dfbddf;
-  transition: .4s;
+  transition: background-color .3s;
 }
 
 .Backspace,
@@ -116,7 +116,7 @@
 }
 
 .key.active {
-  background-color: #bd90bd;
+  background-color: #aa7baa;
   box-shadow: 0 2px #dfbddf;
   transform: translateY(2px);
 }
