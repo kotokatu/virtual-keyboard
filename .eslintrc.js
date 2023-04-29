@@ -12,12 +12,6 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    'import/extensions': [
-      'error',
-      'always',
-      {
-        ignorePackages: true,
-      },
-    ],
+    'import/extensions': 0,
   },
 };
