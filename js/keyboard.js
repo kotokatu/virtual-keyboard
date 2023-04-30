@@ -6,6 +6,7 @@ export default class Keyboard {
   constructor(rows, lang) {
     this.rows = rows;
     this.lang = lang;
+    this.pressedKeys = [];
     this.layout = 'lowerCase';
     this.output = document.querySelector('.output');
   }
@@ -43,6 +44,7 @@ export default class Keyboard {
     const keyName = e.code || e.target.id;
     if (!KEYS[keyName]) return;
     this.output.focus();
+    if (e.type === 'keydown') this.pressedKeys.push(keyName);
     if (keyName !== 'CapsLock') document.querySelector(`.${keyName}`).classList.add('active');
     if (/^Shift*/i.test(keyName)) {
       this.shift = true;
@@ -51,13 +53,18 @@ export default class Keyboard {
       document.querySelector(`.${keyName}`).classList.toggle('active');
       this.caps = !this.caps;
       this.switchLayout();
+    } else if (keyName === 'ControlLeft') {
+      this.ctrl = true;
+    } else if (keyName === 'AltLeft') {
+      this.alt = true;
     } else this.editOutput(keyName);
   };
 
   handleUpEvents = (e) => {
     const keyName = e.code || e.target.id;
+    if (e.type === 'keyup') this.pressedKeys = this.pressedKeys.filter((key) => key !== keyName);
     if ((this.shift && !e.shiftKey) || /^Shift*/i.test(keyName)) {
-      if (KEYS[keyName]?.inputKey) {
+      if (KEYS[keyName].inputKey) {
         document.querySelector(`.${keyName}`).classList.add('keypress');
         this.editOutput(keyName);
       }
@@ -66,10 +73,24 @@ export default class Keyboard {
       this.switchLayout();
     }
     if (keyName === 'ControlLeft') {
-      if (e.altKey) this.switchLanguage();
+      if (this.alt) {
+        this.switchLanguage();
+        if (e.type === 'mouseup' && !e.altKey) {
+          this.keyboard.querySelector('.ControlLeft').classList.add('keypress');
+          this.alt = false;
+        }
+      }
+      this.ctrl = false;
     }
     if (keyName === 'AltLeft') {
-      if (e.ctrlKey) this.switchLanguage();
+      if (this.ctrl) {
+        this.switchLanguage();
+        if (e.type === 'mouseup' && !e.ctrlKey) {
+          this.keyboard.querySelector('.AltLeft').classList.add('keypress');
+          this.ctrl = false;
+        }
+      }
+      this.alt = false;
     }
     this.toggleActive(e, keyName);
   };
@@ -77,7 +98,7 @@ export default class Keyboard {
   editOutput = (keyName) => {
     let { start } = this.getTextSelection();
     const { end, left, right } = this.getTextSelection();
-    if (!KEYS[keyName].inputKey) return;
+    if (!KEYS[keyName]?.inputKey) return;
     if (keyName === 'Backspace') {
       if (start === end) {
         this.output.value = `${left.slice(0, -1)}${right}`;
@@ -134,7 +155,7 @@ export default class Keyboard {
     if (e.type === 'mouseup') {
       const activeKeys = this.keyboard.querySelectorAll('.active');
       activeKeys.forEach((key) => {
-        if (key.id !== 'CapsLock' && !/^Shift*/i.test(key.id)) key.classList.remove('active');
+        if (key.id !== 'CapsLock' && !/^Shift*/i.test(key.id) && !this.pressedKeys.includes(key.id)) key.classList.remove('active');
       });
     }
     if (e.type === 'keyup') {

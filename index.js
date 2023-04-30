@@ -15,3 +15,7 @@ document.body.prepend(main);
 const lang = get('lang');
 const keyboard = new Keyboard(rows, lang);
 keyboard.init();
+const description = createNode('div', 'description', `<p>Клавиатура создана в операционной системе Windows.</p>
+                                <p>Переключение языка: левые Ctrl + Alt или зажатие левого Ctrl мышью + перетаскивание курсора на левый Alt (также работает в обратном порядке).</p>
+                                <p>Для использования Shift, зажмите его мышью, перетащите курсор на нужную кнопку и отпустите зажатие - выбранный символ будет напечатан в поле вывода.</p>`);
+main.append(description);
