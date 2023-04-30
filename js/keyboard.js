@@ -44,52 +44,22 @@ export default class Keyboard {
     if (!KEYS[keyName]) return;
     this.output.focus();
     if (keyName !== 'CapsLock') document.querySelector(`.${keyName}`).classList.add('active');
-    let { start } = this.getTextSelection();
-    const { end, left, right } = this.getTextSelection();
-    if (keyName === 'MetaLeft' || /^Control*/i.test(keyName) || /^Alt*/i.test(keyName)) {
-      return;
-    }
     if (/^Shift*/i.test(keyName)) {
       this.shift = true;
       this.switchLayout();
-    } else if (keyName === 'Backspace') {
-      if (start === end) {
-        this.output.value = `${left.slice(0, -1)}${right}`;
-        start -= 1;
-      } else this.output.value = `${left}${right}`;
-    } else if (keyName === 'Space') {
-      this.output.value = `${left}\u00A0${right}`;
-      start += 1;
-    } else if (keyName === 'Delete') {
-      if (start === end) this.output.value = `${left}${right.slice(1)}`;
-      else this.output.value = `${left}${right}`;
-    } else if (keyName === 'Enter') {
-      this.output.value = `${left}\n${right}`;
-      start += 1;
     } else if (keyName === 'CapsLock') {
       document.querySelector(`.${keyName}`).classList.toggle('active');
       this.caps = !this.caps;
       this.switchLayout();
-    } else if (keyName === 'Tab') {
-      this.output.value = `${left}\u0009${right}`;
-      start += 1;
-    } else {
-      this.output.value = left + KEYS[keyName][this.lang][this.layout] + right;
-      start += 1;
-    }
-    this.output.setSelectionRange(start, start);
+    } else this.editOutput(keyName);
   };
 
   handleUpEvents = (e) => {
     const keyName = e.code || e.target.id;
     if ((this.shift && !e.shiftKey) || /^Shift*/i.test(keyName)) {
-      if (KEYS[keyName] && !KEYS[keyName].fn) {
+      if (KEYS[keyName]?.inputKey) {
         document.querySelector(`.${keyName}`).classList.add('keypress');
-        let { start } = this.getTextSelection();
-        const { left, right } = this.getTextSelection();
-        this.output.value = left + KEYS[keyName][this.lang][this.layout] + right;
-        start += 1;
-        this.output.setSelectionRange(start, start);
+        this.editOutput(keyName);
       }
       document.querySelectorAll('[id*=Shift]').forEach((key) => key.classList.remove('active'));
       this.shift = false;
@@ -106,6 +76,34 @@ export default class Keyboard {
       this.renderLayout();
     }
     this.removeActiveState();
+  };
+
+  editOutput = (keyName) => {
+    let { start } = this.getTextSelection();
+    const { end, left, right } = this.getTextSelection();
+    if (!KEYS[keyName].inputKey) return;
+    if (keyName === 'Backspace') {
+      if (start === end) {
+        this.output.value = `${left.slice(0, -1)}${right}`;
+        start -= 1;
+      } else this.output.value = `${left}${right}`;
+    } else if (keyName === 'Space') {
+      this.output.value = `${left}\u00A0${right}`;
+      start += 1;
+    } else if (keyName === 'Delete') {
+      if (start === end) this.output.value = `${left}${right.slice(1)}`;
+      else this.output.value = `${left}${right}`;
+    } else if (keyName === 'Enter') {
+      this.output.value = `${left}\n${right}`;
+      start += 1;
+    } else if (keyName === 'Tab') {
+      this.output.value = `${left}\u0009${right}`;
+      start += 1;
+    } else {
+      this.output.value = left + KEYS[keyName][this.lang][this.layout] + right;
+      start += 1;
+    }
+    this.output.setSelectionRange(start, start);
   };
 
   switchLayout = () => {

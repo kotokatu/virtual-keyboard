@@ -1,5 +1,6 @@
 const KEYS = {
   Backquote: {
+    inputKey: true,
     eng: {
       lowerCase: '`',
       shift: '~',
@@ -14,6 +15,7 @@ const KEYS = {
     },
   },
   Digit1: {
+    inputKey: true,
     eng: {
       lowerCase: '1',
       shift: '!',
@@ -28,6 +30,7 @@ const KEYS = {
     },
   },
   Digit2: {
+    inputKey: true,
     eng: {
       lowerCase: '2',
       shift: '@',
@@ -42,6 +45,7 @@ const KEYS = {
     },
   },
   Digit3: {
+    inputKey: true,
     eng: {
       lowerCase: '3',
       shift: '#',
@@ -56,6 +60,7 @@ const KEYS = {
     },
   },
   Digit4: {
+    inputKey: true,
     eng: {
       lowerCase: '4',
       shift: '$',
@@ -70,6 +75,7 @@ const KEYS = {
     },
   },
   Digit5: {
+    inputKey: true,
     eng: {
       lowerCase: '5',
       shift: '%',
@@ -84,6 +90,7 @@ const KEYS = {
     },
   },
   Digit6: {
+    inputKey: true,
     eng: {
       lowerCase: '6',
       shift: '^',
@@ -98,6 +105,7 @@ const KEYS = {
     },
   },
   Digit7: {
+    inputKey: true,
     eng: {
       lowerCase: '7',
       shift: '&',
@@ -112,6 +120,7 @@ const KEYS = {
     },
   },
   Digit8: {
+    inputKey: true,
     eng: {
       lowerCase: '8',
       shift: '*',
@@ -126,6 +135,7 @@ const KEYS = {
     },
   },
   Digit9: {
+    inputKey: true,
     eng: {
       lowerCase: '9',
       shift: '(',
@@ -140,6 +150,7 @@ const KEYS = {
     },
   },
   Digit0: {
+    inputKey: true,
     eng: {
       lowerCase: '0',
       shift: ')',
@@ -154,6 +165,7 @@ const KEYS = {
     },
   },
   Minus: {
+    inputKey: true,
     eng: {
       lowerCase: '-',
       shift: '_',
@@ -168,6 +180,7 @@ const KEYS = {
     },
   },
   Equal: {
+    inputKey: true,
     eng: {
       lowerCase: '=',
       shift: '+',
@@ -182,7 +195,7 @@ const KEYS = {
     },
   },
   Backspace: {
-    fn: true,
+    inputKey: true,
     eng: {
       lowerCase: 'Backspace',
       shift: 'Backspace',
@@ -197,7 +210,7 @@ const KEYS = {
     },
   },
   Tab: {
-    fn: true,
+    inputKey: true,
     eng: {
       lowerCase: 'Tab',
       shift: 'Tab',
@@ -212,6 +225,7 @@ const KEYS = {
     },
   },
   KeyQ: {
+    inputKey: true,
     eng: {
       lowerCase: 'q',
       shift: 'Q',
@@ -226,6 +240,7 @@ const KEYS = {
     },
   },
   KeyW: {
+    inputKey: true,
     eng: {
       lowerCase: 'w',
       shift: 'W',
@@ -240,6 +255,7 @@ const KEYS = {
     },
   },
   KeyE: {
+    inputKey: true,
     eng: {
       lowerCase: 'e',
       shift: 'E',
@@ -254,6 +270,7 @@ const KEYS = {
     },
   },
   KeyR: {
+    inputKey: true,
     eng: {
       lowerCase: 'r',
       shift: 'R',
@@ -268,6 +285,7 @@ const KEYS = {
     },
   },
   KeyT: {
+    inputKey: true,
     eng: {
       lowerCase: 't',
       shift: 'T',
@@ -282,6 +300,7 @@ const KEYS = {
     },
   },
   KeyY: {
+    inputKey: true,
     eng: {
       lowerCase: 'y',
       shift: 'Y',
@@ -296,6 +315,7 @@ const KEYS = {
     },
   },
   KeyU: {
+    inputKey: true,
     eng: {
       lowerCase: 'u',
       shift: 'U',
@@ -310,6 +330,7 @@ const KEYS = {
     },
   },
   KeyI: {
+    inputKey: true,
     eng: {
       lowerCase: 'i',
       shift: 'I',
@@ -324,6 +345,7 @@ const KEYS = {
     },
   },
   KeyO: {
+    inputKey: true,
     eng: {
       lowerCase: 'o',
       shift: 'O',
@@ -338,6 +360,7 @@ const KEYS = {
     },
   },
   KeyP: {
+    inputKey: true,
     eng: {
       lowerCase: 'p',
       shift: 'P',
@@ -352,6 +375,7 @@ const KEYS = {
     },
   },
   BracketLeft: {
+    inputKey: true,
     eng: {
       lowerCase: '[',
       shift: '{',
@@ -366,6 +390,7 @@ const KEYS = {
     },
   },
   BracketRight: {
+    inputKey: true,
     eng: {
       lowerCase: ']',
       shift: '}',
@@ -380,6 +405,7 @@ const KEYS = {
     },
   },
   Backslash: {
+    inputKey: true,
     eng: {
       lowerCase: '\\',
       shift: '|',
@@ -394,7 +420,7 @@ const KEYS = {
     },
   },
   Delete: {
-    fn: true,
+    inputKey: true,
     eng: {
       lowerCase: 'Del',
       shift: 'Del',
@@ -424,6 +450,7 @@ const KEYS = {
     },
   },
   KeyA: {
+    inputKey: true,
     eng: {
       lowerCase: 'a',
       shift: 'A',
@@ -438,6 +465,7 @@ const KEYS = {
     },
   },
   KeyS: {
+    inputKey: true,
     eng: {
       lowerCase: 's',
       shift: 'S',
@@ -452,6 +480,7 @@ const KEYS = {
     },
   },
   KeyD: {
+    inputKey: true,
     eng: {
       lowerCase: 'd',
       shift: 'D',
@@ -466,6 +495,7 @@ const KEYS = {
     },
   },
   KeyF: {
+    inputKey: true,
     eng: {
       lowerCase: 'f',
       shift: 'F',
@@ -480,6 +510,7 @@ const KEYS = {
     },
   },
   KeyG: {
+    inputKey: true,
     eng: {
       lowerCase: 'g',
       shift: 'G',
@@ -494,6 +525,7 @@ const KEYS = {
     },
   },
   KeyH: {
+    inputKey: true,
     eng: {
       lowerCase: 'h',
       shift: 'H',
@@ -508,6 +540,7 @@ const KEYS = {
     },
   },
   KeyJ: {
+    inputKey: true,
     eng: {
       lowerCase: 'j',
       shift: 'J',
@@ -522,6 +555,7 @@ const KEYS = {
     },
   },
   KeyK: {
+    inputKey: true,
     eng: {
       lowerCase: 'k',
       shift: 'K',
@@ -536,6 +570,7 @@ const KEYS = {
     },
   },
   KeyL: {
+    inputKey: true,
     eng: {
       lowerCase: 'l',
       shift: 'L',
@@ -550,6 +585,7 @@ const KEYS = {
     },
   },
   Semicolon: {
+    inputKey: true,
     eng: {
       lowerCase: ';',
       shift: ':',
@@ -564,6 +600,7 @@ const KEYS = {
     },
   },
   Quote: {
+    inputKey: true,
     eng: {
       lowerCase: '\'',
       shift: '"',
@@ -578,7 +615,7 @@ const KEYS = {
     },
   },
   Enter: {
-    fn: true,
+    inputKey: true,
     eng: {
       lowerCase: 'Enter',
       shift: 'Enter',
@@ -593,7 +630,6 @@ const KEYS = {
     },
   },
   ShiftLeft: {
-    fn: true,
     eng: {
       lowerCase: 'Shift',
       shift: 'Shift',
@@ -608,6 +644,7 @@ const KEYS = {
     },
   },
   KeyZ: {
+    inputKey: true,
     eng: {
       lowerCase: 'z',
       shift: 'Z',
@@ -622,6 +659,7 @@ const KEYS = {
     },
   },
   KeyX: {
+    inputKey: true,
     eng: {
       lowerCase: 'x',
       shift: 'X',
@@ -636,6 +674,7 @@ const KEYS = {
     },
   },
   KeyC: {
+    inputKey: true,
     eng: {
       lowerCase: 'c',
       shift: 'C',
@@ -650,6 +689,7 @@ const KEYS = {
     },
   },
   KeyV: {
+    inputKey: true,
     eng: {
       lowerCase: 'v',
       shift: 'V',
@@ -664,6 +704,7 @@ const KEYS = {
     },
   },
   KeyB: {
+    inputKey: true,
     eng: {
       lowerCase: 'b',
       shift: 'B',
@@ -678,6 +719,7 @@ const KEYS = {
     },
   },
   KeyN: {
+    inputKey: true,
     eng: {
       lowerCase: 'n',
       shift: 'N',
@@ -692,6 +734,7 @@ const KEYS = {
     },
   },
   KeyM: {
+    inputKey: true,
     eng: {
       lowerCase: 'm',
       shift: 'M',
@@ -706,6 +749,7 @@ const KEYS = {
     },
   },
   Comma: {
+    inputKey: true,
     eng: {
       lowerCase: ',',
       shift: '<',
@@ -720,6 +764,7 @@ const KEYS = {
     },
   },
   Period: {
+    inputKey: true,
     eng: {
       lowerCase: '.',
       shift: '>',
@@ -734,6 +779,7 @@ const KEYS = {
     },
   },
   Slash: {
+    inputKey: true,
     eng: {
       lowerCase: '/',
       shift: '?',
@@ -748,6 +794,7 @@ const KEYS = {
     },
   },
   ArrowUp: {
+    inputKey: true,
     eng: {
       lowerCase: '▲',
       shift: '▲',
@@ -762,7 +809,6 @@ const KEYS = {
     },
   },
   ShiftRight: {
-    fn: true,
     eng: {
       lowerCase: 'Shift',
       shift: 'Shift',
@@ -777,7 +823,6 @@ const KEYS = {
     },
   },
   ControlLeft: {
-    fn: true,
     eng: {
       lowerCase: 'Ctrl',
       shift: 'Ctrl',
@@ -792,7 +837,6 @@ const KEYS = {
     },
   },
   MetaLeft: {
-    fn: true,
     eng: {
       lowerCase: 'Win',
       shift: 'Win',
@@ -807,7 +851,6 @@ const KEYS = {
     },
   },
   AltLeft: {
-    fn: true,
     eng: {
       lowerCase: 'Alt',
       shift: 'Alt',
@@ -822,7 +865,7 @@ const KEYS = {
     },
   },
   Space: {
-    fn: true,
+    inputKey: true,
     eng: {
       lowerCase: '',
       shift: '',
@@ -837,7 +880,6 @@ const KEYS = {
     },
   },
   AltRight: {
-    fn: true,
     eng: {
       lowerCase: 'Alt',
       shift: 'Alt',
@@ -852,6 +894,7 @@ const KEYS = {
     },
   },
   ArrowLeft: {
+    inputKey: true,
     eng: {
       lowerCase: '◄',
       shift: '◄',
@@ -866,6 +909,7 @@ const KEYS = {
     },
   },
   ArrowDown: {
+    inputKey: true,
     eng: {
       lowerCase: '▼',
       shift: '▼',
@@ -880,6 +924,7 @@ const KEYS = {
     },
   },
   ArrowRight: {
+    inputKey: true,
     eng: {
       lowerCase: '►',
       shift: '►',
@@ -894,7 +939,6 @@ const KEYS = {
     },
   },
   ControlRight: {
-    fn: true,
     eng: {
       lowerCase: 'Ctrl',
       shift: 'Ctrl',
