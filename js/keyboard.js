@@ -17,11 +17,11 @@ export default class Keyboard {
     document.addEventListener('keydown', this.handleDownEvents);
     document.addEventListener('keyup', this.handleUpEvents);
     document.addEventListener('mouseup', this.handleUpEvents);
+    return this.keyboard;
   };
 
   renderKeyboard = () => {
     this.keyboard = createNode('div', 'keyboard');
-    document.querySelector('.main').append(this.keyboard);
     this.rows.forEach((row) => this.keyboard.append(this.createRow(row)));
   };
 

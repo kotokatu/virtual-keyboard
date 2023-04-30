@@ -9,13 +9,14 @@ const rows = [
   ['ShiftLeft', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'ArrowUp', 'ShiftRight'],
   ['ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ControlRight'],
 ];
-
-const main = createNode('main', 'main', '<h1 class="main__title">Virtual keyboard</h1><textarea class="output" name="keyboard" id="keyboard" spellcheck="false" autocorrect="off" autocomplete="off"></textarea>');
-document.body.prepend(main);
 const lang = get('lang');
-const keyboard = new Keyboard(rows, lang);
-keyboard.init();
+const main = createNode('main', 'main', `<h1 class="main__title">Virtual keyboard</h1>
+                        <textarea class="output" name="keyboard" id="keyboard" spellcheck="false"
+                        autocorrect="off" autocomplete="off"></textarea>`);
+document.body.prepend(main);
+const keyboard = new Keyboard(rows, lang).init();
+main.append(keyboard);
 const description = createNode('div', 'description', `<p>Клавиатура создана в операционной системе Windows.</p>
-                                <p>Переключение языка: левые Ctrl + Alt или зажатие левого Ctrl мышью + перетаскивание курсора на левый Alt (также работает в обратном порядке).</p>
-                                <p>Для использования Shift, зажмите его мышью, перетащите курсор на нужную кнопку и отпустите зажатие - выбранный символ будет напечатан в поле вывода.</p>`);
+                                <p>Для переключения языка нажмите левые Ctrl + Alt на физической клавиатуре или зажмите левой кнопкой мыши левый Ctrl на экранной клавиатуре и, удерживая кнопку, перетащите курсор на левый Alt (также работает в обратном порядке).</p>
+                                <p>Для использования Shift, зажмите его мышью и, удерживая, перетащите курсор на нужную кнопку. Отпустите зажатие - выбранный символ будет напечатан в поле вывода.</p>`);
 main.append(description);
