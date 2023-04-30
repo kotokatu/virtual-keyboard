@@ -114,7 +114,7 @@ export default class Keyboard {
       this.output.value = `${left}\n${right}`;
       start += 1;
     } else if (keyName === 'Tab') {
-      this.output.value = `${left}\u0009${right}`;
+      this.output.value = `${left}\t${right}`;
       start += 1;
     } else {
       this.output.value = left + KEYS[keyName][this.lang][this.layout] + right;
