@@ -44,12 +44,14 @@ export default class Keyboard {
     const keyName = e.code || e.target.id;
     if (!KEYS[keyName]) return;
     this.output.focus();
-    if (e.type === 'keydown') this.pressedKeys.push(keyName);
+    if (e.type === 'keydown' && !e.repeat) this.pressedKeys.push(keyName);
     document.querySelector(`.${keyName}`).classList.add('pressed');
     if (/^Shift*/i.test(keyName)) {
+      if (e.repeat) return;
       this.shift = true;
       this.switchLayout();
     } else if (keyName === 'CapsLock') {
+      if (e.repeat) return;
       document.querySelector(`.${keyName}`).classList.toggle('active');
       this.caps = !this.caps;
       this.switchLayout();
@@ -63,6 +65,8 @@ export default class Keyboard {
   handleUpEvents = (e) => {
     const keyName = e.code || e.target.id;
     if (e.type === 'keyup') this.pressedKeys = this.pressedKeys.filter((key) => key !== keyName);
+    this.toggleActive(e, keyName);
+    if (!KEYS[keyName]) return;
     if ((this.shift && !e.shiftKey) || /^Shift*/i.test(keyName)) {
       if (KEYS[keyName].inputKey) {
         document.querySelector(`.${keyName}`).classList.add('simulate-press');
@@ -92,7 +96,6 @@ export default class Keyboard {
       }
       this.alt = false;
     }
-    this.toggleActive(e, keyName);
   };
 
   editOutput = (keyName) => {
@@ -159,6 +162,7 @@ export default class Keyboard {
       });
     }
     if (e.type === 'keyup') {
+      if (!KEYS[keyName]) return;
       if (!/^Shift*/i.test(keyName)) document.querySelector(`.${keyName}`).classList.remove('pressed');
     }
   };
