@@ -65,17 +65,13 @@ export default class Keyboard {
       this.shift = false;
       this.switchLayout();
     }
-    if (/^Control*/i.test(keyName)) {
-      if (e.altKey) this.lang = this.lang === 'eng' ? 'rus' : 'eng';
-      set('lang', this.lang);
-      this.renderLayout();
+    if (keyName === 'ControlLeft') {
+      if (e.altKey) this.switchLanguage();
     }
-    if (/^Alt*/i.test(keyName)) {
-      if (e.ctrlKey) this.lang = this.lang === 'eng' ? 'rus' : 'eng';
-      set('lang', this.lang);
-      this.renderLayout();
+    if (keyName === 'AltLeft') {
+      if (e.ctrlKey) this.switchLanguage();
     }
-    this.removeActiveState();
+    this.toggleActive(e, keyName);
   };
 
   editOutput = (keyName) => {
@@ -106,11 +102,24 @@ export default class Keyboard {
     this.output.setSelectionRange(start, start);
   };
 
+  getTextSelection = () => ({
+    start: this.output.selectionStart,
+    end: this.output.selectionEnd,
+    left: this.output.value.substr(0, this.output.selectionStart),
+    right: this.output.value.slice(this.output.selectionEnd),
+  });
+
   switchLayout = () => {
     if (this.shift && this.caps) this.layout = 'shiftCaps';
     else if (this.shift) this.layout = 'shift';
     else if (this.caps) this.layout = 'caps';
     else this.layout = 'lowerCase';
+    this.renderLayout();
+  };
+
+  switchLanguage = () => {
+    this.lang = this.lang === 'eng' ? 'rus' : 'eng';
+    set('lang', this.lang);
     this.renderLayout();
   };
 
@@ -121,17 +130,15 @@ export default class Keyboard {
     });
   };
 
-  removeActiveState = () => {
-    const activeKeys = this.keyboard.querySelectorAll('.active');
-    activeKeys.forEach((key) => {
-      if (key.id !== 'CapsLock' && !/^Shift*/i.test(key.id)) key.classList.remove('active');
-    });
+  toggleActive = (e, keyName) => {
+    if (e.type === 'mouseup') {
+      const activeKeys = this.keyboard.querySelectorAll('.active');
+      activeKeys.forEach((key) => {
+        if (key.id !== 'CapsLock' && !/^Shift*/i.test(key.id)) key.classList.remove('active');
+      });
+    }
+    if (e.type === 'keyup') {
+      if (keyName !== 'CapsLock' && !/^Shift*/i.test(keyName)) document.querySelector(`.${keyName}`).classList.remove('active');
+    }
   };
-
-  getTextSelection = () => ({
-    start: this.output.selectionStart,
-    end: this.output.selectionEnd,
-    left: this.output.value.substr(0, this.output.selectionStart),
-    right: this.output.value.slice(this.output.selectionEnd),
-  });
 }
