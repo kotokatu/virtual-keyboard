@@ -14,9 +14,9 @@ export default class Keyboard {
   init = () => {
     this.renderKeyboard();
     this.output.addEventListener('focusout', () => this.output.focus());
-    document.addEventListener('keydown', this.handleDownEvents);
-    document.addEventListener('keyup', this.handleUpEvents);
-    document.addEventListener('mouseup', this.handleUpEvents);
+    window.addEventListener('keydown', this.handleDownEvents);
+    window.addEventListener('keyup', this.handleUpEvents);
+    window.addEventListener('mouseup', this.handleUpEvents);
     return this.keyboard;
   };
 
@@ -59,20 +59,17 @@ export default class Keyboard {
       this.ctrl = true;
     } else if (keyName === 'AltLeft') {
       this.alt = true;
-    } else this.editOutput(keyName);
+    } else this.editOutput(e, keyName);
   };
 
   handleUpEvents = (e) => {
     const keyName = e.code || e.target.id;
     if (e.type === 'keyup') this.pressedKeys = this.pressedKeys.filter((key) => key !== keyName);
-    this.toggleActive(e, keyName);
-    if (!KEYS[keyName]) return;
     if ((this.shift && !e.shiftKey) || /^Shift*/i.test(keyName)) {
-      if (KEYS[keyName].inputKey) {
+      if (KEYS[keyName]?.inputKey) {
+        this.editOutput(e, keyName);
         document.querySelector(`.${keyName}`).classList.add('simulate-press');
-        this.editOutput(keyName);
       }
-      document.querySelectorAll('[id*=Shift]').forEach((key) => key.classList.remove('pressed'));
       this.shift = false;
       this.switchLayout();
     }
@@ -96,32 +93,41 @@ export default class Keyboard {
       }
       this.alt = false;
     }
+    this.toggleActive(e, keyName);
   };
 
-  editOutput = (keyName) => {
+  editOutput = (e, keyName) => {
     let { start } = this.getTextSelection();
     const { end, left, right } = this.getTextSelection();
     if (!KEYS[keyName]?.inputKey) return;
-    if (keyName === 'Backspace') {
-      if (start === end) {
-        this.output.value = `${left.slice(0, -1)}${right}`;
-        start -= 1;
-      } else this.output.value = `${left}${right}`;
-    } else if (keyName === 'Space') {
-      this.output.value = `${left}\u00A0${right}`;
-      start += 1;
-    } else if (keyName === 'Delete') {
-      if (start === end) this.output.value = `${left}${right.slice(1)}`;
-      else this.output.value = `${left}${right}`;
-    } else if (keyName === 'Enter') {
-      this.output.value = `${left}\n${right}`;
-      start += 1;
-    } else if (keyName === 'Tab') {
-      this.output.value = `${left}\t${right}`;
-      start += 1;
-    } else {
-      this.output.value = left + KEYS[keyName][this.lang][this.layout] + right;
-      start += 1;
+    if (e.type === 'mousedown' && this.pressedKeys.includes(keyName)) return;
+    switch (keyName) {
+      case 'Backspace':
+        if (start === end) {
+          this.output.value = `${left.slice(0, -1)}${right}`;
+          start -= 1;
+        } else this.output.value = `${left}${right}`;
+        break;
+      case 'Space':
+        this.output.value = `${left}\u00A0${right}`;
+        start += 1;
+        break;
+      case 'Delete':
+        if (start === end) this.output.value = `${left}${right.slice(1)}`;
+        else this.output.value = `${left}${right}`;
+        break;
+      case 'Enter':
+        this.output.value = `${left}\n${right}`;
+        start += 1;
+        break;
+      case 'Tab':
+        this.output.value = `${left}\t${right}`;
+        start += 1;
+        break;
+      default:
+        this.output.value = left + KEYS[keyName][this.lang][this.layout] + right;
+        start += 1;
+        break;
     }
     this.output.setSelectionRange(start, start);
   };
@@ -158,12 +164,13 @@ export default class Keyboard {
     if (e.type === 'mouseup') {
       const activeKeys = this.keyboard.querySelectorAll('.pressed');
       activeKeys.forEach((key) => {
-        if (!/^Shift*/i.test(key.id) && !this.pressedKeys.includes(key.id)) key.classList.remove('pressed');
+        if (!this.pressedKeys.includes(key.id)) key.classList.remove('pressed');
       });
     }
     if (e.type === 'keyup') {
       if (!KEYS[keyName]) return;
-      if (!/^Shift*/i.test(keyName)) document.querySelector(`.${keyName}`).classList.remove('pressed');
+      document.querySelector(`.${keyName}`).classList.remove('pressed');
+      if (!e.shiftKey) document.querySelectorAll('[id*=Shift]').forEach((key) => key.classList.remove('pressed'));
     }
   };
 }

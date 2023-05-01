@@ -124,11 +124,11 @@ body {
   right: 3px;
   top: 3px;
   border-radius: 100%;
-  background-color: #997299;
+  background-color: #a398a3;
 }
 
 .CapsLock.active::after {
-  background-color: #f1087d;
+  background-color: #f1083a;
 }
 
 .Tab {
