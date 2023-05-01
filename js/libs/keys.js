@@ -1,0 +1,957 @@
+const KEYS = {
+  Backquote: {
+    inputKey: true,
+    eng: {
+      lowerCase: '`',
+      shift: '~',
+      caps: '`',
+      shiftCaps: '~',
+    },
+    rus: {
+      lowerCase: 'ё',
+      shift: 'Ё',
+      caps: 'Ё',
+      shiftCaps: 'ё',
+    },
+  },
+  Digit1: {
+    inputKey: true,
+    eng: {
+      lowerCase: '1',
+      shift: '!',
+      caps: '1',
+      shiftCaps: '!',
+    },
+    rus: {
+      lowerCase: '1',
+      shift: '!',
+      caps: '1',
+      shiftCaps: '!',
+    },
+  },
+  Digit2: {
+    inputKey: true,
+    eng: {
+      lowerCase: '2',
+      shift: '@',
+      caps: '2',
+      shiftCaps: '@',
+    },
+    rus: {
+      lowerCase: '2',
+      shift: '"',
+      caps: '2',
+      shiftCaps: '"',
+    },
+  },
+  Digit3: {
+    inputKey: true,
+    eng: {
+      lowerCase: '3',
+      shift: '#',
+      caps: '3',
+      shiftCaps: '#',
+    },
+    rus: {
+      lowerCase: '3',
+      shift: '№',
+      caps: '3',
+      shiftCaps: '№',
+    },
+  },
+  Digit4: {
+    inputKey: true,
+    eng: {
+      lowerCase: '4',
+      shift: '$',
+      caps: '4',
+      shiftCaps: '$',
+    },
+    rus: {
+      lowerCase: '4',
+      shift: ';',
+      caps: '4',
+      shiftCaps: ';',
+    },
+  },
+  Digit5: {
+    inputKey: true,
+    eng: {
+      lowerCase: '5',
+      shift: '%',
+      caps: '5',
+      shiftCaps: '%',
+    },
+    rus: {
+      lowerCase: '5',
+      shift: '%',
+      caps: '5',
+      shiftCaps: '%',
+    },
+  },
+  Digit6: {
+    inputKey: true,
+    eng: {
+      lowerCase: '6',
+      shift: '^',
+      caps: '6',
+      shiftCaps: '^',
+    },
+    rus: {
+      lowerCase: '6',
+      shift: ':',
+      caps: '6',
+      shiftCaps: ':',
+    },
+  },
+  Digit7: {
+    inputKey: true,
+    eng: {
+      lowerCase: '7',
+      shift: '&',
+      caps: '7',
+      shiftCaps: '&',
+    },
+    rus: {
+      lowerCase: '7',
+      shift: '?',
+      caps: '7',
+      shiftCaps: '?',
+    },
+  },
+  Digit8: {
+    inputKey: true,
+    eng: {
+      lowerCase: '8',
+      shift: '*',
+      caps: '8',
+      shiftCaps: '*',
+    },
+    rus: {
+      lowerCase: '8',
+      shift: '*',
+      caps: '8',
+      shiftCaps: '*',
+    },
+  },
+  Digit9: {
+    inputKey: true,
+    eng: {
+      lowerCase: '9',
+      shift: '(',
+      caps: '9',
+      shiftCaps: '(',
+    },
+    rus: {
+      lowerCase: '9',
+      shift: '(',
+      caps: '9',
+      shiftCaps: '(',
+    },
+  },
+  Digit0: {
+    inputKey: true,
+    eng: {
+      lowerCase: '0',
+      shift: ')',
+      caps: '0',
+      shiftCaps: ')',
+    },
+    rus: {
+      lowerCase: '0',
+      shift: ')',
+      caps: '0',
+      shiftCaps: ')',
+    },
+  },
+  Minus: {
+    inputKey: true,
+    eng: {
+      lowerCase: '-',
+      shift: '_',
+      caps: '-',
+      shiftCaps: '_',
+    },
+    rus: {
+      lowerCase: '-',
+      shift: '_',
+      caps: '-',
+      shiftCaps: '_',
+    },
+  },
+  Equal: {
+    inputKey: true,
+    eng: {
+      lowerCase: '=',
+      shift: '+',
+      caps: '=',
+      shiftCaps: '+',
+    },
+    rus: {
+      lowerCase: '=',
+      shift: '+',
+      caps: '=',
+      shiftCaps: '+',
+    },
+  },
+  Backspace: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'Backspace',
+      shift: 'Backspace',
+      caps: 'Backspace',
+      shiftCaps: 'Backspace',
+    },
+    rus: {
+      lowerCase: 'Backspace',
+      shift: 'Backspace',
+      caps: 'Backspace',
+      shiftCaps: 'Backspace',
+    },
+  },
+  Tab: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'Tab',
+      shift: 'Tab',
+      caps: 'Tab',
+      shiftCaps: 'Tab',
+    },
+    rus: {
+      lowerCase: 'Tab',
+      shift: 'Tab',
+      caps: 'Tab',
+      shiftCaps: 'Tab',
+    },
+  },
+  KeyQ: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'q',
+      shift: 'Q',
+      caps: 'Q',
+      shiftCaps: 'q',
+    },
+    rus: {
+      lowerCase: 'й',
+      shift: 'Й',
+      caps: 'Й',
+      shiftCaps: 'й',
+    },
+  },
+  KeyW: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'w',
+      shift: 'W',
+      caps: 'W',
+      shiftCaps: 'w',
+    },
+    rus: {
+      lowerCase: 'ц',
+      shift: 'Ц',
+      caps: 'Ц',
+      shiftCaps: 'ц',
+    },
+  },
+  KeyE: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'e',
+      shift: 'E',
+      caps: 'E',
+      shiftCaps: 'e',
+    },
+    rus: {
+      lowerCase: 'у',
+      shift: 'У',
+      caps: 'У',
+      shiftCaps: 'у',
+    },
+  },
+  KeyR: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'r',
+      shift: 'R',
+      caps: 'R',
+      shiftCaps: 'r',
+    },
+    rus: {
+      lowerCase: 'к',
+      shift: 'К',
+      caps: 'К',
+      shiftCaps: 'к',
+    },
+  },
+  KeyT: {
+    inputKey: true,
+    eng: {
+      lowerCase: 't',
+      shift: 'T',
+      caps: 'T',
+      shiftCaps: 't',
+    },
+    rus: {
+      lowerCase: 'е',
+      shift: 'Е',
+      caps: 'Е',
+      shiftCaps: 'е',
+    },
+  },
+  KeyY: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'y',
+      shift: 'Y',
+      caps: 'Y',
+      shiftCaps: 'y',
+    },
+    rus: {
+      lowerCase: 'н',
+      shift: 'Н',
+      caps: 'Н',
+      shiftCaps: 'н',
+    },
+  },
+  KeyU: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'u',
+      shift: 'U',
+      caps: 'U',
+      shiftCaps: 'u',
+    },
+    rus: {
+      lowerCase: 'г',
+      shift: 'Г',
+      caps: 'Г',
+      shiftCaps: 'г',
+    },
+  },
+  KeyI: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'i',
+      shift: 'I',
+      caps: 'I',
+      shiftCaps: 'i',
+    },
+    rus: {
+      lowerCase: 'ш',
+      shift: 'Ш',
+      caps: 'Ш',
+      shiftCaps: 'ш',
+    },
+  },
+  KeyO: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'o',
+      shift: 'O',
+      caps: 'O',
+      shiftCaps: 'o',
+    },
+    rus: {
+      lowerCase: 'щ',
+      shift: 'Щ',
+      caps: 'Щ',
+      shiftCaps: 'щ',
+    },
+  },
+  KeyP: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'p',
+      shift: 'P',
+      caps: 'P',
+      shiftCaps: 'p',
+    },
+    rus: {
+      lowerCase: 'з',
+      shift: 'З',
+      caps: 'З',
+      shiftCaps: 'з',
+    },
+  },
+  BracketLeft: {
+    inputKey: true,
+    eng: {
+      lowerCase: '[',
+      shift: '{',
+      caps: '[',
+      shiftCaps: '{',
+    },
+    rus: {
+      lowerCase: 'х',
+      shift: 'Х',
+      caps: 'Х',
+      shiftCaps: 'х',
+    },
+  },
+  BracketRight: {
+    inputKey: true,
+    eng: {
+      lowerCase: ']',
+      shift: '}',
+      caps: ']',
+      shiftCaps: '}',
+    },
+    rus: {
+      lowerCase: 'ъ',
+      shift: 'Ъ',
+      caps: 'Ъ',
+      shiftCaps: 'ъ',
+    },
+  },
+  Backslash: {
+    inputKey: true,
+    eng: {
+      lowerCase: '\\',
+      shift: '|',
+      caps: '\\',
+      shiftCaps: '|',
+    },
+    rus: {
+      lowerCase: '\\',
+      shift: '/',
+      caps: '\\',
+      shiftCaps: '/',
+    },
+  },
+  Delete: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'Del',
+      shift: 'Del',
+      caps: 'Del',
+      shiftCaps: 'Del',
+    },
+    rus: {
+      lowerCase: 'Del',
+      shift: 'Del',
+      caps: 'Del',
+      shiftCaps: 'Del',
+    },
+  },
+  CapsLock: {
+    fn: true,
+    eng: {
+      lowerCase: 'CapsLock',
+      shift: 'CapsLock',
+      caps: 'CapsLock',
+      shiftCaps: 'CapsLock',
+    },
+    rus: {
+      lowerCase: 'CapsLock',
+      shift: 'CapsLock',
+      caps: 'CapsLock',
+      shiftCaps: 'CapsLock',
+    },
+  },
+  KeyA: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'a',
+      shift: 'A',
+      caps: 'A',
+      shiftCaps: 'a',
+    },
+    rus: {
+      lowerCase: 'ф',
+      shift: 'Ф',
+      caps: 'Ф',
+      shiftCaps: 'ф',
+    },
+  },
+  KeyS: {
+    inputKey: true,
+    eng: {
+      lowerCase: 's',
+      shift: 'S',
+      caps: 'S',
+      shiftCaps: 's',
+    },
+    rus: {
+      lowerCase: 'ы',
+      shift: 'Ы',
+      caps: 'Ы',
+      shiftCaps: 'ы',
+    },
+  },
+  KeyD: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'd',
+      shift: 'D',
+      caps: 'D',
+      shiftCaps: 'd',
+    },
+    rus: {
+      lowerCase: 'в',
+      shift: 'В',
+      caps: 'В',
+      shiftCaps: 'в',
+    },
+  },
+  KeyF: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'f',
+      shift: 'F',
+      caps: 'F',
+      shiftCaps: 'f',
+    },
+    rus: {
+      lowerCase: 'а',
+      shift: 'А',
+      caps: 'А',
+      shiftCaps: 'а',
+    },
+  },
+  KeyG: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'g',
+      shift: 'G',
+      caps: 'G',
+      shiftCaps: 'g',
+    },
+    rus: {
+      lowerCase: 'п',
+      shift: 'П',
+      caps: 'П',
+      shiftCaps: 'п',
+    },
+  },
+  KeyH: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'h',
+      shift: 'H',
+      caps: 'H',
+      shiftCaps: 'h',
+    },
+    rus: {
+      lowerCase: 'р',
+      shift: 'Р',
+      caps: 'Р',
+      shiftCaps: 'р',
+    },
+  },
+  KeyJ: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'j',
+      shift: 'J',
+      caps: 'J',
+      shiftCaps: 'j',
+    },
+    rus: {
+      lowerCase: 'о',
+      shift: 'О',
+      caps: 'О',
+      shiftCaps: 'о',
+    },
+  },
+  KeyK: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'k',
+      shift: 'K',
+      caps: 'K',
+      shiftCaps: 'k',
+    },
+    rus: {
+      lowerCase: 'л',
+      shift: 'Л',
+      caps: 'Л',
+      shiftCaps: 'л',
+    },
+  },
+  KeyL: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'l',
+      shift: 'L',
+      caps: 'L',
+      shiftCaps: 'l',
+    },
+    rus: {
+      lowerCase: 'д',
+      shift: 'Д',
+      caps: 'Д',
+      shiftCaps: 'д',
+    },
+  },
+  Semicolon: {
+    inputKey: true,
+    eng: {
+      lowerCase: ';',
+      shift: ':',
+      caps: ';',
+      shiftCaps: ':',
+    },
+    rus: {
+      lowerCase: 'ж',
+      shift: 'Ж',
+      caps: 'Ж',
+      shiftCaps: 'ж',
+    },
+  },
+  Quote: {
+    inputKey: true,
+    eng: {
+      lowerCase: '\'',
+      shift: '"',
+      caps: '\'',
+      shiftCaps: '"',
+    },
+    rus: {
+      lowerCase: 'э',
+      shift: 'Э',
+      caps: 'Э',
+      shiftCaps: 'э',
+    },
+  },
+  Enter: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'Enter',
+      shift: 'Enter',
+      caps: 'Enter',
+      shiftCaps: 'Enter',
+    },
+    rus: {
+      lowerCase: 'Enter',
+      shift: 'Enter',
+      caps: 'Enter',
+      shiftCaps: 'Enter',
+    },
+  },
+  ShiftLeft: {
+    eng: {
+      lowerCase: 'Shift',
+      shift: 'Shift',
+      caps: 'Shift',
+      shiftCaps: 'Shift',
+    },
+    rus: {
+      lowerCase: 'Shift',
+      shift: 'Shift',
+      caps: 'Shift',
+      shiftCaps: 'Shift',
+    },
+  },
+  KeyZ: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'z',
+      shift: 'Z',
+      caps: 'Z',
+      shiftCaps: 'z',
+    },
+    rus: {
+      lowerCase: 'я',
+      shift: 'Я',
+      caps: 'Я',
+      shiftCaps: 'я',
+    },
+  },
+  KeyX: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'x',
+      shift: 'X',
+      caps: 'X',
+      shiftCaps: 'x',
+    },
+    rus: {
+      lowerCase: 'ч',
+      shift: 'Ч',
+      caps: 'Ч',
+      shiftCaps: 'ч',
+    },
+  },
+  KeyC: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'c',
+      shift: 'C',
+      caps: 'C',
+      shiftCaps: 'c',
+    },
+    rus: {
+      lowerCase: 'с',
+      shift: 'С',
+      caps: 'С',
+      shiftCaps: 'с',
+    },
+  },
+  KeyV: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'v',
+      shift: 'V',
+      caps: 'V',
+      shiftCaps: 'v',
+    },
+    rus: {
+      lowerCase: 'м',
+      shift: 'М',
+      caps: 'М',
+      shiftCaps: 'м',
+    },
+  },
+  KeyB: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'b',
+      shift: 'B',
+      caps: 'B',
+      shiftCaps: 'b',
+    },
+    rus: {
+      lowerCase: 'и',
+      shift: 'И',
+      caps: 'И',
+      shiftCaps: 'и',
+    },
+  },
+  KeyN: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'n',
+      shift: 'N',
+      caps: 'N',
+      shiftCaps: 'n',
+    },
+    rus: {
+      lowerCase: 'т',
+      shift: 'Т',
+      caps: 'Т',
+      shiftCaps: 'т',
+    },
+  },
+  KeyM: {
+    inputKey: true,
+    eng: {
+      lowerCase: 'm',
+      shift: 'M',
+      caps: 'M',
+      shiftCaps: 'm',
+    },
+    rus: {
+      lowerCase: 'ь',
+      shift: 'Ь',
+      caps: 'Ь',
+      shiftCaps: 'ь',
+    },
+  },
+  Comma: {
+    inputKey: true,
+    eng: {
+      lowerCase: ',',
+      shift: '<',
+      caps: ',',
+      shiftCaps: '<',
+    },
+    rus: {
+      lowerCase: 'б',
+      shift: 'Б',
+      caps: 'Б',
+      shiftCaps: 'б',
+    },
+  },
+  Period: {
+    inputKey: true,
+    eng: {
+      lowerCase: '.',
+      shift: '>',
+      caps: '.',
+      shiftCaps: '>',
+    },
+    rus: {
+      lowerCase: 'ю',
+      shift: 'Ю',
+      caps: 'Ю',
+      shiftCaps: 'ю',
+    },
+  },
+  Slash: {
+    inputKey: true,
+    eng: {
+      lowerCase: '/',
+      shift: '?',
+      caps: '/',
+      shiftCaps: '?',
+    },
+    rus: {
+      lowerCase: '.',
+      shift: ',',
+      caps: '.',
+      shiftCaps: ',',
+    },
+  },
+  ArrowUp: {
+    inputKey: true,
+    eng: {
+      lowerCase: '▲',
+      shift: '▲',
+      caps: '▲',
+      shiftCaps: '▲',
+    },
+    rus: {
+      lowerCase: '▲',
+      shift: '▲',
+      caps: '▲',
+      shiftCaps: '▲',
+    },
+  },
+  ShiftRight: {
+    eng: {
+      lowerCase: 'Shift',
+      shift: 'Shift',
+      caps: 'Shift',
+      shiftCaps: 'Shift',
+    },
+    rus: {
+      lowerCase: 'Shift',
+      shift: 'Shift',
+      caps: 'Shift',
+      shiftCaps: 'Shift',
+    },
+  },
+  ControlLeft: {
+    eng: {
+      lowerCase: 'Ctrl',
+      shift: 'Ctrl',
+      caps: 'Ctrl',
+      shiftCaps: 'Ctrl',
+    },
+    rus: {
+      lowerCase: 'Ctrl',
+      shift: 'Ctrl',
+      caps: 'Ctrl',
+      shiftCaps: 'Ctrl',
+    },
+  },
+  MetaLeft: {
+    eng: {
+      lowerCase: 'Win',
+      shift: 'Win',
+      caps: 'Win',
+      shiftCaps: 'Win',
+    },
+    rus: {
+      lowerCase: 'Win',
+      shift: 'Win',
+      caps: 'Win',
+      shiftCaps: 'Win',
+    },
+  },
+  AltLeft: {
+    eng: {
+      lowerCase: 'Alt',
+      shift: 'Alt',
+      caps: 'Alt',
+      shiftCaps: 'Alt',
+    },
+    rus: {
+      lowerCase: 'Alt',
+      shift: 'Alt',
+      caps: 'Alt',
+      shiftCaps: 'Alt',
+    },
+  },
+  Space: {
+    inputKey: true,
+    eng: {
+      lowerCase: '',
+      shift: '',
+      caps: '',
+      shiftCaps: '',
+    },
+    rus: {
+      lowerCase: '',
+      shift: '',
+      caps: '',
+      shiftCaps: '',
+    },
+  },
+  AltRight: {
+    eng: {
+      lowerCase: 'Alt',
+      shift: 'Alt',
+      caps: 'Alt',
+      shiftCaps: 'Alt',
+    },
+    rus: {
+      lowerCase: 'Alt',
+      shift: 'Alt',
+      caps: 'Alt',
+      shiftCaps: 'Alt',
+    },
+  },
+  ArrowLeft: {
+    inputKey: true,
+    eng: {
+      lowerCase: '◄',
+      shift: '◄',
+      caps: '◄',
+      shiftCaps: '◄',
+    },
+    rus: {
+      lowerCase: '◄',
+      shift: '◄',
+      caps: '◄',
+      shiftCaps: '◄',
+    },
+  },
+  ArrowDown: {
+    inputKey: true,
+    eng: {
+      lowerCase: '▼',
+      shift: '▼',
+      caps: '▼',
+      shiftCaps: '▼',
+    },
+    rus: {
+      lowerCase: '▼',
+      shift: '▼',
+      caps: '▼',
+      shiftCaps: '▼',
+    },
+  },
+  ArrowRight: {
+    inputKey: true,
+    eng: {
+      lowerCase: '►',
+      shift: '►',
+      caps: '►',
+      shiftCaps: '►',
+    },
+    rus: {
+      lowerCase: '►',
+      shift: '►',
+      caps: '►',
+      shiftCaps: '►',
+    },
+  },
+  ControlRight: {
+    eng: {
+      lowerCase: 'Ctrl',
+      shift: 'Ctrl',
+      caps: 'Ctrl',
+      shiftCaps: 'Ctrl',
+    },
+    rus: {
+      lowerCase: 'Ctrl',
+      shift: 'Ctrl',
+      caps: 'Ctrl',
+      shiftCaps: 'Ctrl',
+    },
+  },
+};
+
+export default KEYS;
